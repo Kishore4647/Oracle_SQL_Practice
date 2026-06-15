@@ -1,0 +1,190 @@
+SQL> ---1qus
+SQL> select * from emp where mod(sal,2)=0;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        20                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+13 rows selected.
+
+SQL> ---2qus
+SQL> select * from emp where ename like ('a%','e%','i%','o%','u%');
+select * from emp where ename like ('a%','e%','i%','o%','u%')
+                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select * from emp where ename like ('a%' or 'e%' or 'i%' or 'o%' or 'u%');
+select * from emp where ename like ('a%' or 'e%' or 'i%' or 'o%' or 'u%')
+                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select * from emp where ename like 'a%' or 'e%' or 'i%' or 'o%' or 'u%';
+select * from emp where ename like 'a%' or 'e%' or 'i%' or 'o%' or 'u%'
+                                                *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL>  select * from emp where (ename like 'a%') or
+  2  (ename like 'e%') or
+  3  (ename like 'i%') or
+  4  (ename like 'o%')
+  5  or (ename like 'u%');
+
+no rows selected
+
+SQL> ---4qus
+SQL> select ename, sal+comm from emp
+  2  ;
+
+ENAME        SAL+COMM                                                           
+---------- ----------                                                           
+SMITH                                                                           
+ALLEN            1900                                                           
+WARD             1750                                                           
+JONES                                                                           
+MARTIN           2650                                                           
+BLAKE                                                                           
+CLARK                                                                           
+SCOTT                                                                           
+KING                                                                            
+TURNER           1500                                                           
+ADAMS                                                                           
+
+ENAME        SAL+COMM                                                           
+---------- ----------                                                           
+JAMES                                                                           
+FORD                                                                            
+MILLER                                                                          
+
+14 rows selected.
+
+SQL> ---5qus
+SQL> select * from emp
+  2  where hiredate between '1982' and '1987';
+where hiredate between '1982' and '1987'
+                       *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> select * from emp
+  2  where hiredate between (hiredate like '_______82') and (hiredate like '_______87');
+where hiredate between (hiredate like '_______82') and (hiredate like '_______87')
+                                 *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL>  select * from emp
+  2   where hiredate between 1982 and 1987;
+ where hiredate between 1982 and 1987
+                *
+ERROR at line 2:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> select * from emp
+  2  where hiredate between '01-jan-82' and '31-dec-87' ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+SQL> ---6qus
+SQL> select sal*12 from emp
+  2  where ename not like 's%' and sal between 1500 and 3000;
+
+    SAL*12                                                                      
+----------                                                                      
+     19200                                                                      
+     35700                                                                      
+     34200                                                                      
+     29400                                                                      
+     36000                                                                      
+     18000                                                                      
+     36000                                                                      
+
+7 rows selected.
+
+SQL> ---7qus
+SQL> select * from emp
+  2  where hiredate like '___feb___' and ename like '%ll%';
+
+no rows selected
+
+SQL> spool off

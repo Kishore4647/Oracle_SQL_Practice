@@ -1,0 +1,19 @@
+SQL> select dname as deptname from dept;
+
+DEPTNAME                                                                        
+--------------                                                                  
+ACCOUNTING                                                                      
+RESEARCH                                                                        
+SALES                                                                           
+OPERATIONS                                                                      
+
+SQL> select dname deptname from dept;
+
+DEPTNAME                                                                        
+--------------                                                                  
+ACCOUNTING                                                                      
+RESEARCH                                                                        
+SALES                                                                           
+OPERATIONS                                                                      
+
+SQL> spool off
