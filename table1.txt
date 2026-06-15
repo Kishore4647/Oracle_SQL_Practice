@@ -1,0 +1,52 @@
+SQL> create table country(sno number(5) unique, cname varchar2(20) primary key);
+
+Table created.
+
+SQL> create table capital(cname varchar2(20) forign key, capname varchar(20) unique);
+create table capital(cname varchar2(20) forign key, capname varchar(20) unique)
+                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table capital(capname varchar(20) unique, cname varchar2(20) references country(cname));
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+BONUS                          TABLE                                            
+SALGRADE                       TABLE                                            
+CAPITAL                        TABLE                                            
+COUNTRY                        TABLE                                            
+AUTHOR                         TABLE                                            
+BOOKS                          TABLE                                            
+
+8 rows selected.
+
+SQL> desc country;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(5)
+ CNAME                                     NOT NULL VARCHAR2(20)
+
+SQL> insert into country values(1,'india');
+
+1 row created.
+
+SQL> insert into capital values('delhi','india');
+
+1 row created.
+
+SQL> select capname from capital
+  2  where cname='india';
+
+CAPNAME                                                                         
+--------------------                                                            
+delhi                                                                           
+
+SQL> spool off

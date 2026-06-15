@@ -1,0 +1,12 @@
+SQL> select distinct job from emp;
+
+JOB                                                                             
+---------                                                                       
+CLERK                                                                           
+SALESMAN                                                                        
+PRESIDENT                                                                       
+MANAGER                                                                         
+ANALYST                                                                         
+
+SQL> ---distinct is used to eliminate the duplicate data
+SQL> spool off
